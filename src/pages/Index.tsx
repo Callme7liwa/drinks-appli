@@ -117,7 +117,7 @@ async function generateDrink(answers: QuizAnswer, apiKey: string): Promise<Drink
     };
   }
 
-  const prompt = `You are a playful, witty bartender. Based on these details about a person, invent a unique beverage (can be real or completely made up) and give it a creative name:
+  const prompt = `You are an expert bartender and beverage sommelier. Based on these details about a person, recommend a REAL, ACTUAL beverage that exists and is commonly available. Choose from popular drinks like cocktails, coffee drinks, teas, smoothies, juices, sodas, wines, beers, and other established beverages. Do NOT make up nonsensical or silly drinks - recommend real beverages that actually exist.
 
 Age Group: ${answers.ageGroup}
 Gender: ${answers.gender}
@@ -128,9 +128,9 @@ Budget: ${answers.budget}
 Allergies: ${answers.allergies}
 
 Respond in JSON format with:
-- "drinkName": A creative, fun name for the drink
-- "description": A witty 2-3 sentence description of why this drink matches their vibe
-- "dallePrompt": A detailed prompt for DALL-E to create a Pixar-style 3D cartoon of a ${answers.gender === 'male' ? 'man' : answers.gender === 'female' ? 'woman' : 'person'} aged ${answers.ageGroup} holding this specific drink in a ${answers.setting} setting. Make it colorful and fun.`;
+- "drinkName": The name of a REAL beverage that exists and is commonly available
+- "description": A 2-3 sentence explanation of why this real drink is the perfect match for their personality, preferences, and situation
+- "dallePrompt": A detailed, realistic photo prompt for DALL-E showing a ${answers.gender === 'male' ? 'man' : answers.gender === 'female' ? 'woman' : 'person'} in their ${answers.ageGroup.toLowerCase()} years enjoying the drink in a ${answers.setting.toLowerCase()} setting. Include the specific drink details and make it appetizing and realistic.`;
 
   try {
     // First, get drink details
@@ -143,7 +143,7 @@ Respond in JSON format with:
       body: JSON.stringify({
         model: 'gpt-4o',
         messages: [
-          { role: 'system', content: 'You are a creative bartender. Always respond with valid JSON.' },
+          { role: 'system', content: 'You are a knowledgeable sommelier and bartender. Always respond with valid JSON. IMPORTANT: Only recommend REAL drinks that actually exist - no silly or made-up beverages.' },
           { role: 'user', content: prompt }
         ],
         response_format: { type: 'json_object' }

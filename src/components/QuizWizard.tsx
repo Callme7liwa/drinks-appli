@@ -101,7 +101,18 @@ const QuizWizard = ({ onComplete, onBack }: QuizWizardProps) => {
                         ? 'ring-4 ring-primary ring-offset-2 ring-offset-background' 
                         : ''
                     }`}
-                    onClick={() => handleSelect(option.value)}
+                    onClick={() => {
+                      handleSelect(option.value);
+                      // Auto-advance to next question after a brief delay
+                      setTimeout(() => {
+                        if (currentStep === quizQuestions.length - 1) {
+                          onComplete({ ...answers, [currentQuestion.id]: option.value } as QuizAnswer);
+                        } else {
+                          setDirection(1);
+                          setCurrentStep(prev => prev + 1);
+                        }
+                      }, 300);
+                    }}
                   >
                     <span className="text-2xl">{option.emoji}</span>
                     <span className="text-base">{option.label}</span>

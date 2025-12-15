@@ -80,8 +80,9 @@ const LandingScreen = ({ onStart }: LandingScreenProps) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
         >
-          What's Your{' '}
-          <span className="text-gradient">Drink Vibe</span>?
+          What <span className="text-gradient">Beverage</span> Should I
+          <br />
+          <span className="text-gradient">Drink</span>?
         </motion.h1>
 
         <motion.p
