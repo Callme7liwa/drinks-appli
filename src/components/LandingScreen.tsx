@@ -118,6 +118,15 @@ const LandingScreen = ({ onStart }: LandingScreenProps) => {
         >
           ⚡ Takes less than 30 seconds
         </motion.p>
+
+        <motion.p
+          className="text-xs text-muted-foreground mt-6 italic"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2 }}
+        >
+          A Cohen-Tech Application
+        </motion.p>
       </motion.div>
     </div>
   );
